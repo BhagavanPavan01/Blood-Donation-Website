@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+
+    <!-- animated background -->
+    <div class="blob a" aria-hidden="true"></div>
+    <div class="blob b" aria-hidden="true"></div>
+
+    <header class="hero">
+        <div class="brand" role="banner" aria-label="BloodConnect India">
+            <div class="logo" aria-hidden="true"></div>
+            <strong>BloodConnect India</strong>
+        </div>
+        <p class="tagline">Find blood <strong>anywhere, anytime</strong>. Search 24×7 blood banks & hospitals across
+            India by <em>blood group</em>, <em>State</em>, <em>District</em>, and even sort by <em>nearest</em>.
+            Separate listings for <strong>Government</strong> and <strong>Private</strong>.</p>
+
+        <!-- Search / Filter Panel -->
+        <section class="search-panel">
+            <div class="panel">
+                <div class="grid cols-4">
+                    <label class="field">
+                        <span>Blood Group</span>
+                        <select id="bloodGroup">
+                            <option value="">Any</option>
+                            <option>A+</option>
+                            <option>A-</option>
+                            <option>B+</option>
+                            <option>B-</option>
+                            <option>O+</option>
+                            <option>O-</option>
+                            <option>AB+</option>
+                            <option>AB-</option>
+                        </select>
+                    </label>
+
+                    <label class="field">
+                        <span>State</span>
+                        <select id="stateSelect"></select>
+                    </label>
+
+                    <label class="field">
+                        <span>District</span>
+                        <select id="districtSelect"></select>
+                    </label>
+
+                    <label class="field" aria-label="Hospital Type">
+                        <span>Type</span>
+                        <div class="segmented" role="tablist" aria-label="Type">
+                            <button class="active" data-type="all" role="tab" aria-selected="true">All</button>
+                            <button data-type="Government" role="tab">Govt</button>
+                            <button data-type="Private" role="tab">Private</button>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="row" style="margin-top:10px">
+                    <button id="useLocation" class="btn-ghost" aria-label="Use my location to sort by nearest">📍 Use My
+                        Location</button>
+                    <div class="grow"></div>
+                    <button id="searchBtn" class="btn-primary">🔎 Search</button>
+                    <button id="resetBtn" class="btn-ghost">↻ Reset</button>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main class="results">
+        <div class="meta" id="metaBar" hidden>
+            <div class="row">
+                <span class="badge" id="countBadge">0 results</span>
+                <span class="badge" id="sortBadge">Sorted by relevance</span>
+                <span class="badge success" id="gpsBadge" hidden>Location On</span>
+            </div>
+            <div class="row">
+                <button class="btn-ghost" id="sortRelevance">Sort: Relevance</button>
+                <button class="btn-ghost" id="sortNearest">Sort: Nearest</button>
+                <button class="btn-ghost" id="exportBtn">Export Results (CSV)</button>
+            </div>
+        </div>
+
+        <section id="list" class="list"></section>
+
+        <div id="emptyState" class="empty" style="display:none">
+            No matches yet. Try another blood group/region or click <strong>Use My Location</strong> for nearest
+            options.
+        </div>
+    </main>
+
+    <footer>
+        <div class="credits">
+            <span class="pill">⚠️ Disclaimer: Demo dataset included. Add more hospitals easily in <code>HOSPITALS</code>
+                below.</span>
+            <span class="pill">Made for India 🇮🇳 • 24×7 where specified</span>
+        </div>
+    </footer>
+
+
+
+</body>
+
+</html>
