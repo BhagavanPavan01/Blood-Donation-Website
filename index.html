@@ -1,112 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blood Donation Portal</title>
-    <link rel="stylesheet" href="style.css">
+    <title>WeatherViz - Dynamic Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
 </head>
-
 <body>
-
-
-    <!-- animated background -->
-    <div class="blob a" aria-hidden="true"></div>
-    <div class="blob b" aria-hidden="true"></div>
-
-    <header class="hero">
-        <div class="brand" role="banner" aria-label="BloodConnect India">
-            <div class="logo" aria-hidden="true"></div>
-            <strong>BloodConnect India</strong>
+    <div class="weather-app">
+        <!-- Animated Background Elements -->
+        <div class="weather-background">
+            <div class="sun"></div>
+            <div class="moon"></div>
+            <div class="clouds"></div>
+            <div class="rain"></div>
+            <div class="snow"></div>
+            <div class="stars"></div>
+            <div class="lightning"></div>
+            <div class="fog"></div>
         </div>
-        <p class="tagline">Find blood <strong>anywhere, anytime</strong>. Search 24×7 blood banks & hospitals across
-            India by <em>blood group</em>, <em>State</em>, <em>District</em>, and even sort by <em>nearest</em>.
-            Separate listings for <strong>Government</strong> and <strong>Private</strong>.</p>
 
-        <!-- Search / Filter Panel -->
-        <section class="search-panel">
-            <div class="panel">
-                <div class="grid cols-4">
-                    <label class="field">
-                        <span>Blood Group</span>
-                        <select id="bloodGroup">
-                            <option value="">Any</option>
-                            <option>A+</option>
-                            <option>A-</option>
-                            <option>B+</option>
-                            <option>B-</option>
-                            <option>O+</option>
-                            <option>O-</option>
-                            <option>AB+</option>
-                            <option>AB-</option>
-                        </select>
-                    </label>
+        <div class="container">
+            <header class="header">
+                <h1>WeatherViz</h1>
+                <div class="search-box">
+                    <input type="text" id="location-input" placeholder="Search for a city...">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                    <button id="location-btn"><i class="fas fa-location-arrow"></i></button>
+                </div>
+            </header>
 
-                    <label class="field">
-                        <span>State</span>
-                        <select id="stateSelect"></select>
-                    </label>
-
-                    <label class="field">
-                        <span>District</span>
-                        <select id="districtSelect"></select>
-                    </label>
-
-                    <label class="field" aria-label="Hospital Type">
-                        <span>Type</span>
-                        <div class="segmented" role="tablist" aria-label="Type">
-                            <button class="active" data-type="all" role="tab" aria-selected="true">All</button>
-                            <button data-type="Government" role="tab">Govt</button>
-                            <button data-type="Private" role="tab">Private</button>
+            <main class="main-content">
+                <div class="current-weather">
+                    <div class="location-info">
+                        <h2 id="city-name">Visakhapatnam</h2>
+                        <p id="current-date">Loading date...</p>
+                    </div>
+                    <div class="weather-display">
+                        <div class="temperature">
+                            <div class="temp-value" id="current-temp">--</div>
+                            <div class="temp-unit">
+                                <span class="active">°C</span>
+                                <span>°F</span>
+                            </div>
                         </div>
-                    </label>
+                        <div class="weather-icon" id="weather-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <div class="detail">
+                            <i class="fas fa-temperature-high"></i>
+                            <span id="feels-like">Feels like: --°</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-tint"></i>
+                            <span id="humidity">Humidity: --%</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-wind"></i>
+                            <span id="wind">Wind: -- km/h</span>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-eye"></i>
+                            <span id="visibility">Visibility: -- km</span>
+                        </div>
+                    </div>
+                    <div class="weather-description" id="weather-description">Loading weather data...</div>
                 </div>
 
-                <div class="row" style="margin-top:10px">
-                    <button id="useLocation" class="btn-ghost" aria-label="Use my location to sort by nearest">📍 Use My
-                        Location</button>
-                    <div class="grow"></div>
-                    <button id="searchBtn" class="btn-primary">🔎 Search</button>
-                    <button id="resetBtn" class="btn-ghost">↻ Reset</button>
+                <div class="forecast">
+                    <h3>5-Day Forecast</h3>
+                    <div class="forecast-cards" id="forecast-cards">
+                        <!-- Forecast cards will be inserted here by JavaScript -->
+                    </div>
                 </div>
-            </div>
-        </section>
-    </header>
 
-    <main class="results">
-        <div class="meta" id="metaBar" hidden>
-            <div class="row">
-                <span class="badge" id="countBadge">0 results</span>
-                <span class="badge" id="sortBadge">Sorted by relevance</span>
-                <span class="badge success" id="gpsBadge" hidden>Location On</span>
-            </div>
-            <div class="row">
-                <button class="btn-ghost" id="sortRelevance">Sort: Relevance</button>
-                <button class="btn-ghost" id="sortNearest">Sort: Nearest</button>
-                <button class="btn-ghost" id="exportBtn">Export Results (CSV)</button>
-            </div>
+                <div class="hourly-forecast">
+                    <h3>Hourly Forecast</h3>
+                    <div class="hourly-scroll" id="hourly-scroll">
+                        <!-- Hourly forecast items will be inserted here -->
+                    </div>
+                </div>
+
+                <div class="additional-info">
+                    <div class="info-card">
+                        <h4>Sunrise & Sunset</h4>
+                        <div class="sun-times">
+                            <div>
+                                <i class="fas fa-sunrise"></i>
+                                <span id="sunrise">--:--</span>
+                            </div>
+                            <div>
+                                <i class="fas fa-sunset"></i>
+                                <span id="sunset">--:--</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h4>UV Index</h4>
+                        <div class="uv-index">
+                            <span id="uv-value">--</span>
+                            <span id="uv-text">(---)</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h4>Pressure</h4>
+                        <div class="pressure">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span id="pressure">--- hPa</span>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
+    </div>
 
-        <section id="list" class="list"></section>
-
-        <div id="emptyState" class="empty" style="display:none">
-            No matches yet. Try another blood group/region or click <strong>Use My Location</strong> for nearest
-            options.
-        </div>
-    </main>
-
-    <footer>
-        <div class="credits">
-            <span class="pill">⚠️ Disclaimer: Demo dataset included. Add more hospitals easily in <code>HOSPITALS</code>
-                below.</span>
-            <span class="pill">Made for India 🇮🇳 • 24×7 where specified</span>
-        </div>
-    </footer>
-
-
-
+    
 </body>
-
 </html>

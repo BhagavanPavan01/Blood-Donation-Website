@@ -1,212 +1,358 @@
-// --- Demo hospital dataset (expand freely) ---
-// Fields: id, name, type, state, district, address, phone, coords {lat,lng}, hours, availableGroups[], website(optional), is24x7
-const HOSPITALS = [
-    { id: 1, name: "Govt. General Hospital Blood Bank", type: "Government", state: "Andhra Pradesh", district: "Srikakulam", address: "RIMS Campus, Balaga, Srikakulam", phone: "08942-222222", coords: { lat: 18.2969, lng: 83.8961 }, hours: "24x7", availableGroups: ["A+", "B+", "O+", "AB+", "O-"], website: "https://ap.gov.in", is24x7: true },
-    { id: 2, name: "KIMS ICON Hospital Blood Bank", type: "Private", state: "Andhra Pradesh", district: "Visakhapatnam", address: "Sheela Nagar, Vizag", phone: "0891-1234567", coords: { lat: 17.7000, lng: 83.2167 }, hours: "24x7", availableGroups: ["A+", "O+", "B-", "AB+", "A-"], website: "https://kimsvizag.com", is24x7: true },
-    { id: 3, name: "NIMS Blood Bank", type: "Government", state: "Telangana", district: "Hyderabad", address: "Panjagutta, Hyderabad", phone: "040-23489000", coords: { lat: 17.4275, lng: 78.4483 }, hours: "24x7", availableGroups: ["A+", "B+", "O+", "AB+", "O-", "AB-"], website: "https://nims.edu.in", is24x7: true },
-    { id: 4, name: "Osmania General Hospital Blood Bank", type: "Government", state: "Telangana", district: "Hyderabad", address: "Afzal Gunj, Hyderabad", phone: "040-23538846", coords: { lat: 17.3713, lng: 78.4804 }, hours: "24x7", availableGroups: ["A+", "B+", "O+", "A-", "B-", "O-", "AB+"], is24x7: true },
-    { id: 5, name: "Apollo Hospitals Blood Bank", type: "Private", state: "Telangana", district: "Hyderabad", address: "Jubilee Hills, Hyderabad", phone: "040-23607777", coords: { lat: 17.4279, lng: 78.4128 }, hours: "24x7", availableGroups: ["A+", "B+", "O+", "AB+", "AB-", "O-"], website: "https://apollohospitals.com", is24x7: true },
-    { id: 6, name: "KEM Hospital Blood Bank", type: "Government", state: "Maharashtra", district: "Mumbai", address: "Parel, Mumbai", phone: "022-24136000", coords: { lat: 19.002, lng: 72.842 }, hours: "24x7", availableGroups: ["O+", "A+", "B+", "AB+", "O-"], is24x7: true },
-    { id: 7, name: "Tata Memorial Hospital Blood Bank", type: "Government", state: "Maharashtra", district: "Mumbai", address: "Parel, Mumbai", phone: "022-24177000", coords: { lat: 18.998, lng: 72.844 }, hours: "24x7", availableGroups: ["A+", "B+", "O+", "AB+", "O-", "A-"], is24x7: true },
-    { id: 8, name: "Fortis Hospital Blood Bank", type: "Private", state: "Karnataka", district: "Bengaluru Urban", address: "Bannerghatta Rd, Bengaluru", phone: "080-66214444", coords: { lat: 12.9108, lng: 77.6033 }, hours: "24x7", availableGroups: ["A+", "B+", "O+", "AB+", "O-", "B-"], website: "https://fortishealthcare.com", is24x7: true },
-    { id: 9, name: "AIIMS Blood Bank", type: "Government", state: "Delhi", district: "New Delhi", address: "Ansari Nagar, New Delhi", phone: "011-26588500", coords: { lat: 28.5672, lng: 77.2100 }, hours: "24x7", availableGroups: ["A+", "B+", "O+", "AB+", "A-", "O-", "AB-"], website: "https://aiims.edu", is24x7: true },
-    { id: 10, name: "Safdarjung Hospital Blood Bank", type: "Government", state: "Delhi", district: "New Delhi", address: "Ring Rd, New Delhi", phone: "011-26707000", coords: { lat: 28.5679, lng: 77.2090 }, hours: "24x7", availableGroups: ["O+", "A+", "B+", "AB+", "O-"], is24x7: true },
-    { id: 11, name: "Madras Medical College Blood Bank", type: "Government", state: "Tamil Nadu", district: "Chennai", address: "Park Town, Chennai", phone: "044-25305000", coords: { lat: 13.0827, lng: 80.2757 }, hours: "24x7", availableGroups: ["A+", "B+", "O+", "AB+", "O-", "AB-"], is24x7: true },
-    { id: 12, name: "Apollo Hospitals Blood Bank", type: "Private", state: "Tamil Nadu", district: "Chennai", address: "Greams Rd, Chennai", phone: "044-28293333", coords: { lat: 13.061, lng: 80.264 }, hours: "24x7", availableGroups: ["A+", "B+", "O+", "AB+", "A-", "O-"], website: "https://apollohospitals.com", is24x7: true },
-    { id: 13, name: "Ruby Hall Clinic Blood Bank", type: "Private", state: "Maharashtra", district: "Pune", address: "Sassoon Rd, Pune", phone: "020-26123391", coords: { lat: 18.5308, lng: 73.8795 }, hours: "24x7", availableGroups: ["A+", "B+", "O+", "AB+", "O-"], is24x7: true },
-    { id: 14, name: "Victoria Hospital Blood Bank", type: "Government", state: "Karnataka", district: "Bengaluru Urban", address: "KR Rd, Bengaluru", phone: "080-26701150", coords: { lat: 12.9597, lng: 77.5727 }, hours: "24x7", availableGroups: ["O+", "A+", "B+", "AB+", "O-", "AB-"], is24x7: true },
-    { id: 15, name: "Gandhi Hospital Blood Bank", type: "Government", state: "Telangana", district: "Hyderabad", address: "Musheerabad, Hyderabad", phone: "040-27505566", coords: { lat: 17.423, lng: 78.501 }, hours: "24x7", availableGroups: ["A+", "O+", "B+", "AB+", "O-"], is24x7: true }
-];
+// DOM Elements
+const locationInput = document.getElementById('location-input');
+const searchBtn = document.getElementById('search-btn');
+const locationBtn = document.getElementById('location-btn');
+const cityName = document.getElementById('city-name');
+const currentDate = document.getElementById('current-date');
+const currentTemp = document.getElementById('current-temp');
+const tempUnits = document.querySelectorAll('.temp-unit span');
+const weatherIcon = document.getElementById('weather-icon');
+const weatherDescription = document.getElementById('weather-description');
+const feelsLike = document.getElementById('feels-like');
+const humidity = document.getElementById('humidity');
+const wind = document.getElementById('wind');
+const visibility = document.getElementById('visibility');
+const forecastCards = document.getElementById('forecast-cards');
+const hourlyScroll = document.getElementById('hourly-scroll');
+const sunrise = document.getElementById('sunrise');
+const sunset = document.getElementById('sunset');
+const uvValue = document.getElementById('uv-value');
+const uvText = document.getElementById('uv-text');
+const pressure = document.getElementById('pressure');
 
-// Build State -> District mapping from dataset
-const geoMap = HOSPITALS.reduce((acc, h) => { (acc[h.state] ||= new Set()).add(h.district); return acc; }, {});
+// Weather Elements
+const weatherApp = document.querySelector('.weather-app');
+const weatherBackground = document.querySelector('.weather-background');
+const sun = document.querySelector('.sun');
+const moon = document.querySelector('.moon');
+const clouds = document.querySelector('.clouds');
+const rain = document.querySelector('.rain');
+const snow = document.querySelector('.snow');
+const stars = document.querySelector('.stars');
+const lightning = document.querySelector('.lightning');
+const fog = document.querySelector('.fog');
 
-// Persist filters between visits
-const store = {
-    load() {
-        try { return JSON.parse(localStorage.getItem('bc_filters') || '{}'); } catch { return {}; }
-    },
-    save(obj) { localStorage.setItem('bc_filters', JSON.stringify(obj)); }
-};
+// API Key and Base URL
+const API_KEY = 'YOUR_OPENWEATHERMAP_API_KEY'; // Replace with your actual API key
+const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
-const els = {
-    bloodGroup: document.getElementById('bloodGroup'),
-    state: document.getElementById('stateSelect'),
-    district: document.getElementById('districtSelect'),
-    typeTabs: document.querySelectorAll('.segmented button'),
-    searchBtn: document.getElementById('searchBtn'),
-    resetBtn: document.getElementById('resetBtn'),
-    list: document.getElementById('list'),
-    empty: document.getElementById('emptyState'),
-    meta: document.getElementById('metaBar'),
-    countBadge: document.getElementById('countBadge'),
-    sortBadge: document.getElementById('sortBadge'),
-    gpsBadge: document.getElementById('gpsBadge'),
-    useLocation: document.getElementById('useLocation'),
-    sortRel: document.getElementById('sortRelevance'),
-    sortNear: document.getElementById('sortNearest'),
-    exportBtn: document.getElementById('exportBtn')
-};
+// Current unit (Celsius by default)
+let currentUnit = 'metric';
 
-let filter = { group: "", state: "", district: "", type: "all" };
-let userLoc = null; // {lat,lng}
-let lastResults = [];
-
-function initSelectors() {
-    // State options
-    const states = Object.keys(geoMap).sort();
-    els.state.innerHTML = `<option value="">All States</option>` + states.map(s => `<option>${s}</option>`).join('');
-    // District options start empty
-    els.district.innerHTML = `<option value="">All Districts</option>`;
-}
-
-function restoreFilters() {
-    const saved = store.load();
-    Object.assign(filter, saved);
-    els.bloodGroup.value = filter.group || "";
-    els.state.value = filter.state || "";
-    updateDistricts(filter.state, filter.district);
-    els.typeTabs.forEach(b => {
-        const on = (b.dataset.type === (filter.type || 'all'));
-        b.classList.toggle('active', on); b.setAttribute('aria-selected', on);
+// Initialize the app
+document.addEventListener('DOMContentLoaded', () => {
+    // Set current date
+    updateCurrentDate();
+    
+    // Get user's current location weather
+    getLocationWeather();
+    
+    // Set up event listeners
+    searchBtn.addEventListener('click', searchLocation);
+    locationBtn.addEventListener('click', getLocationWeather);
+    locationInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            searchLocation();
+        }
     });
-}
-
-function updateDistricts(state, preselect = "") {
-    if (!state) { els.district.innerHTML = `<option value="">All Districts</option>`; return; }
-    const dists = Array.from(geoMap[state] || []).sort();
-    els.district.innerHTML = `<option value="">All Districts</option>` + dists.map(d => `<option ${d === preselect ? 'selected' : ''}>${d}</option>`).join('');
-}
-
-function km(a, b) { // haversine
-    const R = 6371, toRad = x => x * Math.PI / 180;
-    const dLat = toRad(b.lat - a.lat), dLng = toRad(b.lng - a.lng);
-    const s = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * Math.sin(dLng / 2) ** 2;
-    return R * 2 * Math.atan2(Math.sqrt(s), Math.sqrt(1 - s));
-}
-
-function formatGroups(arr) { return arr.join(', '); }
-
-function render(results) {
-    lastResults = results.slice();
-    els.meta.hidden = false;
-    els.countBadge.textContent = `${results.length} result${results.length !== 1 ? 's' : ''}`;
-    els.list.innerHTML = '';
-    if (results.length === 0) { els.empty.style.display = 'block'; return; } else { els.empty.style.display = 'none'; }
-
-    const frag = document.createDocumentFragment();
-    results.forEach((h, i) => {
-        const card = document.createElement('article');
-        card.className = 'card fade-in';
-        card.style.animationDelay = `${i * 30}ms`;
-        const distance = (userLoc && h.coords) ? `${km(userLoc, h.coords).toFixed(1)} km` : null;
-        card.innerHTML = `
-          <div class="row" style="justify-content:space-between; align-items:flex-start">
-            <div>
-              <div class="title">${h.name}</div>
-              <div class="sub">${h.address || ''}</div>
-            </div>
-            <span class="badge ${h.type === 'Government' ? '' : 'warn'}">${h.type}</span>
-          </div>
-          <div class="chips">
-            <span class="badge ${h.is24x7 ? 'success' : ''}">🕒 ${h.is24x7 ? '24×7' : (h.hours || 'Hours vary')}</span>
-            <span class="badge">🩸 ${formatGroups(h.availableGroups)}</span>
-            ${distance ? `<span class="badge">📍 ${distance}</span>` : ''}
-          </div>
-          <div class="actions">
-            ${h.phone ? `<a href="tel:${h.phone.replace(/[^0-9+]/g, '')}" aria-label="Call ${h.name}">📞 Call</a>` : ''}
-            ${h.coords ? `<a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.name + ' ' + (h.address || ''))}" aria-label="Directions to ${h.name}">🗺️ Directions</a>` : ''}
-            ${h.website ? `<a target="_blank" rel="noopener" href="${h.website}" aria-label="Website of ${h.name}">🌐 Website</a>` : ''}
-            <button class="btn-ghost" onclick='navigator.clipboard.writeText("${(h.phone || '').replace(/"/g, '')}")'>Copy Phone</button>
-          </div>`;
-        frag.appendChild(card);
+    
+    // Temperature unit toggle
+    tempUnits.forEach(unit => {
+        unit.addEventListener('click', () => {
+            if (!unit.classList.contains('active')) {
+                tempUnits.forEach(u => u.classList.remove('active'));
+                unit.classList.add('active');
+                currentUnit = unit.textContent === '°C' ? 'metric' : 'imperial';
+                // Refresh weather data with new unit
+                const currentCity = cityName.textContent;
+                getWeatherData(currentCity);
+            }
+        });
     });
-    els.list.appendChild(frag);
-}
-
-function doSearch() {
-    const { group, state, district, type } = filter;
-    let res = HOSPITALS.filter(h => {
-        const okGroup = !group || (h.availableGroups || []).includes(group);
-        const okState = !state || h.state === state;
-        const okDist = !district || h.district === district;
-        const okType = (type === 'all') || h.type === type;
-        return okGroup && okState && okDist && okType;
-    });
-
-    // Basic relevance: prioritize exact blood group + 24x7 + same district/state
-    res.sort((a, b) => {
-        let s = 0;
-        const score = (h) => (
-            (group && h.availableGroups.includes(group) ? 5 : 0) +
-            (h.is24x7 ? 2 : 0) +
-            (state && h.state === state ? 1 : 0) +
-            (district && h.district === district ? 1 : 0)
-        );
-        s = score(b) - score(a);
-        return s;
-    });
-
-    els.sortBadge.textContent = 'Sorted by relevance';
-    render(res);
-    store.save(filter);
-}
-
-function sortNearest() {
-    if (!userLoc) { alert('Please enable location first (Use My Location).'); return; }
-    const res = lastResults.slice().sort((a, b) => {
-        const da = a.coords ? km(userLoc, a.coords) : 99999;
-        const db = b.coords ? km(userLoc, b.coords) : 99999;
-        return da - db;
-    });
-    els.sortBadge.textContent = 'Sorted by nearest';
-    render(res);
-}
-
-function exportCSV() {
-    if (!lastResults.length) { alert('No results to export.'); return; }
-    const cols = ['Name', 'Type', 'State', 'District', 'Address', 'Phone', '24x7', 'AvailableGroups'];
-    const rows = lastResults.map(h => [
-        h.name, h.type, h.state, h.district, h.address || '', h.phone || '', h.is24x7 ? 'Yes' : 'No', (h.availableGroups || []).join(' ')
-    ]);
-    const csv = [cols.join(','), ...rows.map(r => r.map(x => `"${String(x).replaceAll('"', '""')}"`).join(','))].join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = 'bloodconnect_results.csv'; a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 500);
-}
-
-// Event wiring
-els.typeTabs.forEach(b => b.addEventListener('click', () => {
-    els.typeTabs.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected', 'false'); });
-    b.classList.add('active'); b.setAttribute('aria-selected', 'true');
-    filter.type = b.dataset.type;
-}));
-
-els.state.addEventListener('change', e => { filter.state = e.target.value; updateDistricts(filter.state); filter.district = ''; });
-els.district.addEventListener('change', e => { filter.district = e.target.value; });
-els.bloodGroup.addEventListener('change', e => { filter.group = e.target.value; });
-
-els.searchBtn.addEventListener('click', doSearch);
-els.resetBtn.addEventListener('click', () => { filter = { group: '', state: '', district: '', type: 'all' }; restoreFilters(); doSearch(); });
-els.sortRel.addEventListener('click', doSearch);
-els.sortNear.addEventListener('click', sortNearest);
-els.exportBtn.addEventListener('click', exportCSV);
-
-els.useLocation.addEventListener('click', () => {
-    if (!('geolocation' in navigator)) { alert('Geolocation not supported on this device.'); return; }
-    navigator.geolocation.getCurrentPosition(pos => {
-        userLoc = { lat: pos.coords.latitude, lng: pos.coords.longitude };
-        els.gpsBadge.hidden = false;
-        // Re-sort by nearest immediately if we already searched
-        if (lastResults.length) { sortNearest(); }
-    }, err => {
-        alert('Location access denied. You can still search by State/District.');
-    }, { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 });
 });
 
-// Init on load
-initSelectors();
-restoreFilters();
-doSearch(); // initial
+// Update current date
+function updateCurrentDate() {
+    const now = new Date();
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+    };
+    currentDate.textContent = now.toLocaleDateString('en-US', options);
+}
+
+// Search for a location
+function searchLocation() {
+    const location = locationInput.value.trim();
+    if (location) {
+        getWeatherData(location);
+        locationInput.value = '';
+    }
+}
+
+// Get weather for user's current location
+function getLocationWeather() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                const { latitude, longitude } = position.coords;
+                getWeatherByCoords(latitude, longitude);
+            },
+            error => {
+                console.error('Error getting location:', error);
+                // Default to a city if location access is denied
+                getWeatherData('Visakhapatnam');
+            }
+        );
+    } else {
+        alert('Geolocation is not supported by your browser.');
+        getWeatherData('Visakhapatnam');
+    }
+}
+
+// Get weather data by city name
+async function getWeatherData(city) {
+    try {
+        // Current weather
+        const currentResponse = await fetch(
+            `${BASE_URL}/weather?q=${city}&units=${currentUnit}&appid=${API_KEY}`
+        );
+        
+        if (!currentResponse.ok) {
+            throw new Error('City not found');
+        }
+        
+        const currentData = await currentResponse.json();
+        
+        // Forecast (5 day / 3 hour)
+        const forecastResponse = await fetch(
+            `${BASE_URL}/forecast?q=${city}&units=${currentUnit}&appid=${API_KEY}`
+        );
+        const forecastData = await forecastResponse.json();
+        
+        // Update UI with weather data
+        updateCurrentWeather(currentData);
+        updateForecast(forecastData);
+        updateHourlyForecast(forecastData);
+        
+        // Update weather visuals
+        updateWeatherVisuals(currentData.weather[0].main, currentData.dt, currentData.sys.sunrise, currentData.sys.sunset);
+        
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+        alert('Error fetching weather data. Please try another location.');
+    }
+}
+
+// Get weather data by coordinates
+async function getWeatherByCoords(lat, lon) {
+    try {
+        // Current weather
+        const currentResponse = await fetch(
+            `${BASE_URL}/weather?lat=${lat}&lon=${lon}&units=${currentUnit}&appid=${API_KEY}`
+        );
+        const currentData = await currentResponse.json();
+        
+        // Forecast (5 day / 3 hour)
+        const forecastResponse = await fetch(
+            `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&units=${currentUnit}&appid=${API_KEY}`
+        );
+        const forecastData = await forecastResponse.json();
+        
+        // Update UI with weather data
+        updateCurrentWeather(currentData);
+        updateForecast(forecastData);
+        updateHourlyForecast(forecastData);
+        
+        // Update weather visuals
+        updateWeatherVisuals(currentData.weather[0].main, currentData.dt, currentData.sys.sunrise, currentData.sys.sunset);
+        
+    } catch (error) {
+        console.error('Error fetching weather data:', error);
+        alert('Error fetching weather data. Please try again.');
+    }
+}
+
+// Update current weather display
+function updateCurrentWeather(data) {
+    cityName.textContent = data.name;
+    
+    const temp = Math.round(data.main.temp);
+    currentTemp.textContent = temp;
+    
+    const feelsLikeTemp = Math.round(data.main.feels_like);
+    feelsLike.textContent = `Feels like: ${feelsLikeTemp}°`;
+    
+    humidity.textContent = `Humidity: ${data.main.humidity}%`;
+    
+    const windSpeed = currentUnit === 'metric' 
+        ? `${Math.round(data.wind.speed * 3.6)} km/h` 
+        : `${Math.round(data.wind.speed)} mph`;
+    wind.textContent = `Wind: ${windSpeed}`;
+    
+    const visibilityDist = currentUnit === 'metric' 
+        ? `${data.visibility / 1000} km` 
+        : `${(data.visibility / 1000 * 0.621371).toFixed(1)} mi`;
+    visibility.textContent = `Visibility: ${visibilityDist}`;
+    
+    weatherDescription.textContent = data.weather[0].description
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+    
+    // Update weather icon
+    updateWeatherIcon(data.weather[0].icon, weatherIcon);
+    
+    // Update sunrise/sunset times
+    const sunriseTime = new Date(data.sys.sunrise * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const sunsetTime = new Date(data.sys.sunset * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    sunrise.textContent = sunriseTime;
+    sunset.textContent = sunsetTime;
+    
+    // Update UV index (not available in basic API, would need UV index API)
+    uvValue.textContent = '--';
+    uvText.textContent = '(---)';
+    
+    // Update pressure
+    pressure.textContent = `${data.main.pressure} hPa`;
+}
+
+// Update 5-day forecast
+function updateForecast(data) {
+    // Clear previous forecast cards
+    forecastCards.innerHTML = '';
+    
+    // We'll get one forecast per day (around midday)
+    const dailyForecasts = [];
+    const daysProcessed = new Set();
+    
+    for (const forecast of data.list) {
+        const date = new Date(forecast.dt * 1000);
+        const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+        
+        // Only take one forecast per day (around 12:00 PM)
+        if (date.getHours() >= 12 && date.getHours() <= 14 && !daysProcessed.has(day)) {
+            daysProcessed.add(day);
+            dailyForecasts.push(forecast);
+            
+            if (dailyForecasts.length === 5) break;
+        }
+    }
+    
+    // Create forecast cards
+    dailyForecasts.forEach(forecast => {
+        const date = new Date(forecast.dt * 1000);
+        const day = date.toLocaleDateString('en-US', { weekday: 'short' });
+        const tempMax = Math.round(forecast.main.temp_max);
+        const tempMin = Math.round(forecast.main.temp_min);
+        
+        const card = document.createElement('div');
+        card.className = 'forecast-card';
+        card.innerHTML = `
+            <div class="forecast-day">${day}</div>
+            <div class="forecast-icon">
+                <i class="${getWeatherIconClass(forecast.weather[0].icon)}"></i>
+            </div>
+            <div class="forecast-temp">
+                <span>${tempMax}°</span>
+                <span>${tempMin}°</span>
+            </div>
+        `;
+        
+        forecastCards.appendChild(card);
+    });
+}
+
+// Update hourly forecast
+function updateHourlyForecast(data) {
+    // Clear previous hourly items
+    hourlyScroll.innerHTML = '';
+    
+    // Get next 24 hours of forecasts (3-hour intervals)
+    const hourlyForecasts = data.list.slice(0, 8); // Next 24 hours (8 * 3-hour intervals)
+    
+    hourlyForecasts.forEach(forecast => {
+        const date = new Date(forecast.dt * 1000);
+        const time = date.toLocaleTimeString([], { hour: '2-digit' });
+        const temp = Math.round(forecast.main.temp);
+        
+        const item = document.createElement('div');
+        item.className = 'hourly-item';
+        item.innerHTML = `
+            <div class="hourly-time">${time}</div>
+            <div class="hourly-icon">
+                <i class="${getWeatherIconClass(forecast.weather[0].icon)}"></i>
+            </div>
+            <div class="hourly-temp">${temp}°</div>
+        `;
+        
+        hourlyScroll.appendChild(item);
+    });
+}
+
+// Update weather icon based on OpenWeatherMap icon code
+function updateWeatherIcon(iconCode, element) {
+    const iconClass = getWeatherIconClass(iconCode);
+    element.innerHTML = `<i class="${iconClass}"></i>`;
+}
+
+// Map OpenWeatherMap icon codes to Font Awesome classes
+function getWeatherIconClass(iconCode) {
+    const iconMap = {
+        '01d': 'fas fa-sun',           // clear sky (day)
+        '01n': 'fas fa-moon',          // clear sky (night)
+        '02d': 'fas fa-cloud-sun',     // few clouds (day)
+        '02n': 'fas fa-cloud-moon',    // few clouds (night)
+        '03d': 'fas fa-cloud',         // scattered clouds
+        '03n': 'fas fa-cloud',
+        '04d': 'fas fa-cloud',         // broken clouds
+        '04n': 'fas fa-cloud',
+        '09d': 'fas fa-cloud-rain',   // shower rain
+        '09n': 'fas fa-cloud-rain',
+        '10d': 'fas fa-cloud-sun-rain', // rain (day)
+        '10n': 'fas fa-cloud-moon-rain', // rain (night)
+        '11d': 'fas fa-bolt',          // thunderstorm
+        '11n': 'fas fa-bolt',
+        '13d': 'far fa-snowflake',     // snow
+        '13n': 'far fa-snowflake',
+        '50d': 'fas fa-smog',          // mist
+        '50n': 'fas fa-smog'
+    };
+    
+    return iconMap[iconCode] || 'fas fa-question';
+}
+
+// Update weather visuals based on conditions and time
+function updateWeatherVisuals(weatherCondition, currentTime, sunriseTime, sunsetTime) {
+    // Reset all weather classes
+    weatherApp.className = 'weather-app';
+    
+    // Determine if it's day or night
+    const isDaytime = currentTime > sunriseTime && currentTime < sunsetTime;
+    
+    // Set day/night class
+    if (isDaytime) {
+        weatherApp.classList.add('day');
+    } else {
+        weatherApp.classList.add('night');
+    }
+    
+    // Set weather condition class
+    const condition = weatherCondition.toLowerCase();
+    if (condition.includes('rain') || condition.includes('drizzle')) {
+        weatherApp.classList.add('rainy');
+    } else if (condition.includes('snow')) {
+        weatherApp.classList.add('snowy');
+    } else if (condition.includes('thunder')) {
+        weatherApp.classList.add('thunder');
+    } else if (condition.includes('fog') || condition.includes('mist') || condition.includes('haze')) {
+        weatherApp.classList.add('foggy');
+    }
+    
+    // Special case for clear night with stars
+    if (!isDaytime && condition.includes('clear')) {
+        stars.style.opacity = '0.8';
+    }
+}
