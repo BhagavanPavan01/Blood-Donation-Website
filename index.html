@@ -3,121 +3,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeatherViz - Dynamic Weather App</title>
+    <title>WeatherSphere - Interactive Weather Visualization</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
     <div class="weather-app">
-        <!-- Animated Background Elements -->
-        <div class="weather-background">
-            <div class="sun"></div>
-            <div class="moon"></div>
+        <!-- Animated Background -->
+        <div class="background-container">
+            <div class="sky"></div>
             <div class="clouds"></div>
+            <div class="sun"></div>
             <div class="rain"></div>
             <div class="snow"></div>
+            <div class="fog"></div>
             <div class="stars"></div>
             <div class="lightning"></div>
-            <div class="fog"></div>
         </div>
 
-        <div class="container">
-            <header class="header">
-                <h1>WeatherViz</h1>
-                <div class="search-box">
-                    <input type="text" id="location-input" placeholder="Search for a city...">
-                    <button id="search-btn"><i class="fas fa-search"></i></button>
-                    <button id="location-btn"><i class="fas fa-location-arrow"></i></button>
-                </div>
-            </header>
+        <!-- Main Content -->
+        <div class="main-container">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search for a location...">
+                <button class="search-btn"><i class="fas fa-search"></i></button>
+                <button class="location-btn"><i class="fas fa-location-arrow"></i></button>
+                <div class="search-results"></div>
+            </div>
 
-            <main class="main-content">
-                <div class="current-weather">
-                    <div class="location-info">
-                        <h2 id="city-name">Visakhapatnam</h2>
-                        <p id="current-date">Loading date...</p>
-                    </div>
-                    <div class="weather-display">
-                        <div class="temperature">
-                            <div class="temp-value" id="current-temp">--</div>
-                            <div class="temp-unit">
-                                <span class="active">°C</span>
-                                <span>°F</span>
-                            </div>
-                        </div>
-                        <div class="weather-icon" id="weather-icon">
-                            <i class="fas fa-sun"></i>
-                        </div>
-                    </div>
-                    <div class="weather-details">
-                        <div class="detail">
-                            <i class="fas fa-temperature-high"></i>
-                            <span id="feels-like">Feels like: --°</span>
-                        </div>
-                        <div class="detail">
-                            <i class="fas fa-tint"></i>
-                            <span id="humidity">Humidity: --%</span>
-                        </div>
-                        <div class="detail">
-                            <i class="fas fa-wind"></i>
-                            <span id="wind">Wind: -- km/h</span>
-                        </div>
-                        <div class="detail">
-                            <i class="fas fa-eye"></i>
-                            <span id="visibility">Visibility: -- km</span>
-                        </div>
-                    </div>
-                    <div class="weather-description" id="weather-description">Loading weather data...</div>
+            <!-- Current Weather -->
+            <div class="current-weather">
+                <div class="location-info">
+                    <h1 class="location-name">Vizianagaram</h1>
+                    <p class="location-region">Andhra Pradesh, India</p>
+                    <p class="current-date">Monday, August 18, 2025</p>
                 </div>
+                <div class="weather-main">
+                    <div class="weather-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="weather-temp">
+                        <span class="temp">32</span><span class="temp-unit">°C</span>
+                    </div>
+                    <div class="weather-desc">Sunny</div>
+                </div>
+                <div class="weather-details">
+                    <div class="detail-item">
+                        <i class="fas fa-wind"></i>
+                        <span class="detail-value">12 km/h</span>
+                        <span class="detail-label">Wind</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-tint"></i>
+                        <span class="detail-value">65%</span>
+                        <span class="detail-label">Humidity</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-cloud-rain"></i>
+                        <span class="detail-value">0%</span>
+                        <span class="detail-label">Precip</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-eye"></i>
+                        <span class="detail-value">10 km</span>
+                        <span class="detail-label">Visibility</span>
+                    </div>
+                </div>
+            </div>
 
-                <div class="forecast">
-                    <h3>5-Day Forecast</h3>
-                    <div class="forecast-cards" id="forecast-cards">
-                        <!-- Forecast cards will be inserted here by JavaScript -->
+            <!-- Hourly Forecast -->
+            <div class="hourly-forecast">
+                <h2 class="section-title">Hourly Forecast</h2>
+                <div class="hourly-container">
+                    <div class="hourly-item">
+                        <div class="hour">Now</div>
+                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
+                        <div class="hour-temp">32°</div>
+                    </div>
+                    <div class="hourly-item">
+                        <div class="hour">1 PM</div>
+                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
+                        <div class="hour-temp">34°</div>
+                    </div>
+                    <div class="hourly-item">
+                        <div class="hour">2 PM</div>
+                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
+                        <div class="hour-temp">35°</div>
+                    </div>
+                    <div class="hourly-item">
+                        <div class="hour">3 PM</div>
+                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
+                        <div class="hour-temp">35°</div>
+                    </div>
+                    <div class="hourly-item">
+                        <div class="hour">4 PM</div>
+                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
+                        <div class="hour-temp">34°</div>
+                    </div>
+                    <div class="hourly-item">
+                        <div class="hour">5 PM</div>
+                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
+                        <div class="hour-temp">32°</div>
+                    </div>
+                    <div class="hourly-item">
+                        <div class="hour">6 PM</div>
+                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
+                        <div class="hour-temp">30°</div>
                     </div>
                 </div>
+            </div>
 
-                <div class="hourly-forecast">
-                    <h3>Hourly Forecast</h3>
-                    <div class="hourly-scroll" id="hourly-scroll">
-                        <!-- Hourly forecast items will be inserted here -->
+            <!-- Daily Forecast -->
+            <div class="daily-forecast">
+                <h2 class="section-title">7-Day Forecast</h2>
+                <div class="daily-container">
+                    <div class="daily-item">
+                        <div class="day">Today</div>
+                        <div class="day-icon"><i class="fas fa-sun"></i></div>
+                        <div class="day-temp">
+                            <span class="max-temp">35°</span>
+                            <span class="min-temp">26°</span>
+                        </div>
+                    </div>
+                    <div class="daily-item">
+                        <div class="day">Tue</div>
+                        <div class="day-icon"><i class="fas fa-cloud-sun"></i></div>
+                        <div class="day-temp">
+                            <span class="max-temp">34°</span>
+                            <span class="min-temp">26°</span>
+                        </div>
+                    </div>
+                    <div class="daily-item">
+                        <div class="day">Wed</div>
+                        <div class="day-icon"><i class="fas fa-cloud-showers-heavy"></i></div>
+                        <div class="day-temp">
+                            <span class="max-temp">31°</span>
+                            <span class="min-temp">25°</span>
+                        </div>
+                    </div>
+                    <div class="daily-item">
+                        <div class="day">Thu</div>
+                        <div class="day-icon"><i class="fas fa-cloud-rain"></i></div>
+                        <div class="day-temp">
+                            <span class="max-temp">30°</span>
+                            <span class="min-temp">25°</span>
+                        </div>
+                    </div>
+                    <div class="daily-item">
+                        <div class="day">Fri</div>
+                        <div class="day-icon"><i class="fas fa-cloud-sun"></i></div>
+                        <div class="day-temp">
+                            <span class="max-temp">32°</span>
+                            <span class="min-temp">26°</span>
+                        </div>
+                    </div>
+                    <div class="daily-item">
+                        <div class="day">Sat</div>
+                        <div class="day-icon"><i class="fas fa-sun"></i></div>
+                        <div class="day-temp">
+                            <span class="max-temp">34°</span>
+                            <span class="min-temp">27°</span>
+                        </div>
+                    </div>
+                    <div class="daily-item">
+                        <div class="day">Sun</div>
+                        <div class="day-icon"><i class="fas fa-sun"></i></div>
+                        <div class="day-temp">
+                            <span class="max-temp">35°</span>
+                            <span class="min-temp">27°</span>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="additional-info">
-                    <div class="info-card">
-                        <h4>Sunrise & Sunset</h4>
-                        <div class="sun-times">
-                            <div>
-                                <i class="fas fa-sunrise"></i>
-                                <span id="sunrise">--:--</span>
-                            </div>
-                            <div>
-                                <i class="fas fa-sunset"></i>
-                                <span id="sunset">--:--</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <h4>UV Index</h4>
-                        <div class="uv-index">
-                            <span id="uv-value">--</span>
-                            <span id="uv-text">(---)</span>
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <h4>Pressure</h4>
-                        <div class="pressure">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <span id="pressure">--- hPa</span>
+            <!-- Map View -->
+            <div class="map-container">
+                <h2 class="section-title">Map View</h2>
+                <div class="map-placeholder">
+                    <div class="map-overlay">
+                        <div class="map-controls">
+                            <button class="map-btn"><i class="fas fa-plus"></i></button>
+                            <button class="map-btn"><i class="fas fa-minus"></i></button>
+                            <button class="map-btn"><i class="fas fa-crosshairs"></i></button>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
+
+            <!-- Additional Info -->
+            <div class="additional-info">
+                <div class="info-card">
+                    <h3>Sunrise & Sunset</h3>
+                    <div class="info-content">
+                        <div class="sun-time">
+                            <i class="fas fa-sunrise"></i>
+                            <span>6:12 AM</span>
+                        </div>
+                        <div class="sun-time">
+                            <i class="fas fa-sunset"></i>
+                            <span>6:45 PM</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h3>Air Quality</h3>
+                    <div class="info-content">
+                        <div class="air-quality-index">78</div>
+                        <div class="air-quality-desc">Moderate</div>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <h3>UV Index</h3>
+                    <div class="info-content">
+                        <div class="uv-index">8</div>
+                        <div class="uv-desc">Very High</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel">
+            <button class="settings-btn"><i class="fas fa-cog"></i></button>
+            <div class="settings-content">
+                <h3>Settings</h3>
+                <div class="setting-option">
+                    <label for="temp-unit">Temperature Unit:</label>
+                    <select id="temp-unit">
+                        <option value="celsius">Celsius (°C)</option>
+                        <option value="fahrenheit">Fahrenheit (°F)</option>
+                    </select>
+                </div>
+                <div class="setting-option">
+                    <label for="wind-unit">Wind Speed Unit:</label>
+                    <select id="wind-unit">
+                        <option value="kmh">km/h</option>
+                        <option value="mph">mph</option>
+                        <option value="ms">m/s</option>
+                    </select>
+                </div>
+                <div class="setting-option">
+                    <label for="theme">Theme:</label>
+                    <select id="theme">
+                        <option value="light">Light</option>
+                        <option value="dark">Dark</option>
+                        <option value="auto">Auto (System)</option>
+                    </select>
+                </div>
+                <button class="save-settings">Save Settings</button>
+            </div>
         </div>
     </div>
 
-    
+    <script src="script.js"></script>
 </body>
 </html>
