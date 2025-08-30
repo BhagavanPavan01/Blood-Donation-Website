@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,254 +9,185 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <div class="weather-app">
-        <!-- Animated Background -->
-        <div class="background-container">
-            <div class="sky"></div>
-            <div class="clouds"></div>
-            <div class="sun"></div>
-            <div class="rain"></div>
-            <div class="snow"></div>
-            <div class="fog"></div>
-            <div class="stars"></div>
-            <div class="lightning"></div>
-        </div>
-
-        <!-- Main Content -->
-        <div class="main-container">
-            <!-- Search Bar -->
-            <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search for a location...">
-                <button class="search-btn"><i class="fas fa-search"></i></button>
-                <button class="location-btn"><i class="fas fa-location-arrow"></i></button>
-                <div class="search-results"></div>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-heartbeat"></i>
+                <span>LifeSaver</span>
             </div>
-
-            <!-- Current Weather -->
-            <div class="current-weather">
-                <div class="location-info">
-                    <h1 class="location-name">Vizianagaram</h1>
-                    <p class="location-region">Andhra Pradesh, India</p>
-                    <p class="current-date">Monday, August 18, 2025</p>
-                </div>
-                <div class="weather-main">
-                    <div class="weather-icon">
-                        <i class="fas fa-sun"></i>
-                    </div>
-                    <div class="weather-temp">
-                        <span class="temp">32</span><span class="temp-unit">°C</span>
-                    </div>
-                    <div class="weather-desc">Sunny</div>
-                </div>
-                <div class="weather-details">
-                    <div class="detail-item">
-                        <i class="fas fa-wind"></i>
-                        <span class="detail-value">12 km/h</span>
-                        <span class="detail-label">Wind</span>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-tint"></i>
-                        <span class="detail-value">65%</span>
-                        <span class="detail-label">Humidity</span>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-cloud-rain"></i>
-                        <span class="detail-value">0%</span>
-                        <span class="detail-label">Precip</span>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fas fa-eye"></i>
-                        <span class="detail-value">10 km</span>
-                        <span class="detail-label">Visibility</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hourly Forecast -->
-            <div class="hourly-forecast">
-                <h2 class="section-title">Hourly Forecast</h2>
-                <div class="hourly-container">
-                    <div class="hourly-item">
-                        <div class="hour">Now</div>
-                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
-                        <div class="hour-temp">32°</div>
-                    </div>
-                    <div class="hourly-item">
-                        <div class="hour">1 PM</div>
-                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
-                        <div class="hour-temp">34°</div>
-                    </div>
-                    <div class="hourly-item">
-                        <div class="hour">2 PM</div>
-                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
-                        <div class="hour-temp">35°</div>
-                    </div>
-                    <div class="hourly-item">
-                        <div class="hour">3 PM</div>
-                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
-                        <div class="hour-temp">35°</div>
-                    </div>
-                    <div class="hourly-item">
-                        <div class="hour">4 PM</div>
-                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
-                        <div class="hour-temp">34°</div>
-                    </div>
-                    <div class="hourly-item">
-                        <div class="hour">5 PM</div>
-                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
-                        <div class="hour-temp">32°</div>
-                    </div>
-                    <div class="hourly-item">
-                        <div class="hour">6 PM</div>
-                        <div class="hour-icon"><i class="fas fa-sun"></i></div>
-                        <div class="hour-temp">30°</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Daily Forecast -->
-            <div class="daily-forecast">
-                <h2 class="section-title">7-Day Forecast</h2>
-                <div class="daily-container">
-                    <div class="daily-item">
-                        <div class="day">Today</div>
-                        <div class="day-icon"><i class="fas fa-sun"></i></div>
-                        <div class="day-temp">
-                            <span class="max-temp">35°</span>
-                            <span class="min-temp">26°</span>
-                        </div>
-                    </div>
-                    <div class="daily-item">
-                        <div class="day">Tue</div>
-                        <div class="day-icon"><i class="fas fa-cloud-sun"></i></div>
-                        <div class="day-temp">
-                            <span class="max-temp">34°</span>
-                            <span class="min-temp">26°</span>
-                        </div>
-                    </div>
-                    <div class="daily-item">
-                        <div class="day">Wed</div>
-                        <div class="day-icon"><i class="fas fa-cloud-showers-heavy"></i></div>
-                        <div class="day-temp">
-                            <span class="max-temp">31°</span>
-                            <span class="min-temp">25°</span>
-                        </div>
-                    </div>
-                    <div class="daily-item">
-                        <div class="day">Thu</div>
-                        <div class="day-icon"><i class="fas fa-cloud-rain"></i></div>
-                        <div class="day-temp">
-                            <span class="max-temp">30°</span>
-                            <span class="min-temp">25°</span>
-                        </div>
-                    </div>
-                    <div class="daily-item">
-                        <div class="day">Fri</div>
-                        <div class="day-icon"><i class="fas fa-cloud-sun"></i></div>
-                        <div class="day-temp">
-                            <span class="max-temp">32°</span>
-                            <span class="min-temp">26°</span>
-                        </div>
-                    </div>
-                    <div class="daily-item">
-                        <div class="day">Sat</div>
-                        <div class="day-icon"><i class="fas fa-sun"></i></div>
-                        <div class="day-temp">
-                            <span class="max-temp">34°</span>
-                            <span class="min-temp">27°</span>
-                        </div>
-                    </div>
-                    <div class="daily-item">
-                        <div class="day">Sun</div>
-                        <div class="day-icon"><i class="fas fa-sun"></i></div>
-                        <div class="day-temp">
-                            <span class="max-temp">35°</span>
-                            <span class="min-temp">27°</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Map View -->
-            <div class="map-container">
-                <h2 class="section-title">Map View</h2>
-                <div class="map-placeholder">
-                    <div class="map-overlay">
-                        <div class="map-controls">
-                            <button class="map-btn"><i class="fas fa-plus"></i></button>
-                            <button class="map-btn"><i class="fas fa-minus"></i></button>
-                            <button class="map-btn"><i class="fas fa-crosshairs"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Info -->
-            <div class="additional-info">
-                <div class="info-card">
-                    <h3>Sunrise & Sunset</h3>
-                    <div class="info-content">
-                        <div class="sun-time">
-                            <i class="fas fa-sunrise"></i>
-                            <span>6:12 AM</span>
-                        </div>
-                        <div class="sun-time">
-                            <i class="fas fa-sunset"></i>
-                            <span>6:45 PM</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="info-card">
-                    <h3>Air Quality</h3>
-                    <div class="info-content">
-                        <div class="air-quality-index">78</div>
-                        <div class="air-quality-desc">Moderate</div>
-                    </div>
-                </div>
-                <div class="info-card">
-                    <h3>UV Index</h3>
-                    <div class="info-content">
-                        <div class="uv-index">8</div>
-                        <div class="uv-desc">Very High</div>
-                    </div>
-                </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Find Blood</a></li>
+                    <li><a href="#">Donate Blood</a></li>
+                    <li><a href="#">Hospitals</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline">Login</button>
+                <button class="btn btn-primary">Register</button>
             </div>
         </div>
+    </header>
 
-        <!-- Settings Panel -->
-        <div class="settings-panel">
-            <button class="settings-btn"><i class="fas fa-cog"></i></button>
-            <div class="settings-content">
-                <h3>Settings</h3>
-                <div class="setting-option">
-                    <label for="temp-unit">Temperature Unit:</label>
-                    <select id="temp-unit">
-                        <option value="celsius">Celsius (°C)</option>
-                        <option value="fahrenheit">Fahrenheit (°F)</option>
-                    </select>
-                </div>
-                <div class="setting-option">
-                    <label for="wind-unit">Wind Speed Unit:</label>
-                    <select id="wind-unit">
-                        <option value="kmh">km/h</option>
-                        <option value="mph">mph</option>
-                        <option value="ms">m/s</option>
-                    </select>
-                </div>
-                <div class="setting-option">
-                    <label for="theme">Theme:</label>
-                    <select id="theme">
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                        <option value="auto">Auto (System)</option>
-                    </select>
-                </div>
-                <button class="save-settings">Save Settings</button>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Donate Blood, Save Lives</h1>
+            <p>Join India's largest blood donation network connecting donors with those in need</p>
+            <div class="search-box">
+                <input type="text" placeholder="Search by blood group, city or hospital...">
+                <button><i class="fas fa-search"></i></button>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">How It Works</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-hospital"></i>
+                <h3>Hospital Registration</h3>
+                <p>Hospitals can register to request blood units and manage inventory</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-user-plus"></i>
+                <h3>Donor Registration</h3>
+                <p>Donors can register and get notified when their blood type is needed</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-tint"></i>
+                <h3>Blood Donation</h3>
+                <p>Find nearby blood donation camps and schedule appointments</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-hand-holding-heart"></i>
+                <h3>Receive Blood</h3>
+                <p>Patients can request blood units from registered hospitals</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blood Groups Section -->
+    <section class="blood-groups">
+        <h2 class="section-title">Blood Groups</h2>
+        <div class="blood-grid">
+            <div class="blood-type">
+                <h3>A+</h3>
+                <p>12% of population</p>
+            </div>
+            <div class="blood-type">
+                <h3>A-</h3>
+                <p>6% of population</p>
+            </div>
+            <div class="blood-type">
+                <h3>B+</h3>
+                <p>25% of population</p>
+            </div>
+            <div class="blood-type">
+                <h3>B-</h3>
+                <p>5% of population</p>
+            </div>
+            <div class="blood-type">
+                <h3>AB+</h3>
+                <p>8% of population</p>
+            </div>
+            <div class="blood-type">
+                <h3>AB-</h3>
+                <p>3% of population</p>
+            </div>
+            <div class="blood-type">
+                <h3>O+</h3>
+                <p>35% of population</p>
+            </div>
+            <div class="blood-type">
+                <h3>O-</h3>
+                <p>6% of population</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section class="registration">
+        <h2 class="section-title">Register Now</h2>
+        <div class="tabs">
+            <button class="tab-btn active">Donor</button>
+            <button class="tab-btn">Hospital</button>
+            <button class="tab-btn">Patient</button>
+        </div>
+        <div class="form-container">
+            <form id="registration-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label for="blood-group">Blood Group</label>
+                    <select id="blood-group">
+                        <option value="">Select Blood Group</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" placeholder="Enter your city">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Register as Donor</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About LifeSaver</h3>
+                <p>LifeSaver is a non-profit initiative connecting blood donors with recipients across India, ensuring
+                    timely access to safe blood.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Find Blood</a></li>
+                    <li><a href="#">Donate Blood</a></li>
+                    <li><a href="#">Organize Camp</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Health Street, Mumbai, India</p>
+                <p><i class="fas fa-phone"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> info@lifesaver.in</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 LifeSaver Blood Donation Initiative. All rights reserved.</p>
+        </div>
+    </footer>
+
 
     <script src="script.js"></script>
 </body>
+
 </html>
